@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tak Ada Kamu</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:#087bc5;
+}
+.sky{
+  position:fixed;inset:0;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 23% 32%,rgba(255,255,255,.95) 0%,rgba(208,243,255,.8) 8%,transparent 25%),
+    radial-gradient(ellipse at 35% 43%,rgba(255,255,255,.8) 0%,rgba(188,232,255,.55) 10%,transparent 28%),
+    radial-gradient(ellipse at 78% 58%,rgba(83,184,255,.65) 0%,transparent 24%),
+    linear-gradient(180deg,#0752a6 0%,#087acb 42%,#44b8f0 70%,#b3e7ff 100%);
+}
+.stars{position:absolute;inset:0;opacity:.65;background-image:radial-gradient(#fff 1px,transparent 1.5px),radial-gradient(#c6edff 1px,transparent 1.5px);background-size:79px 83px,121px 107px;background-position:0 0,35px 49px}
+.cloud{
+ position:absolute;background:rgba(239,250,255,.76);filter:blur(17px);border-radius:50%;
+ animation:drift 28s ease-in-out infinite alternate;
+}
+.cloud.a{width:48vw;height:19vh;left:-9vw;top:20vh}
+.cloud.b{width:40vw;height:15vh;left:17vw;top:29vh;opacity:.7;animation-delay:-8s}
+.cloud.c{width:32vw;height:13vh;right:-7vw;top:40vh;opacity:.6;animation-delay:-13s}
+@keyframes drift{from{transform:translateX(-2vw)}to{transform:translateX(5vw)}}
+.hill{
+ position:absolute;left:-10%;right:-10%;bottom:-16%;height:43%;
+ background:linear-gradient(160deg,#284c45,#152d32 55%,#081c2b);
+ border-radius:48% 52% 0 0/20% 17% 0 0;transform:rotate(-3deg);
+ box-shadow:inset 0 20px 40px #7bc9d655;
+}
+.hill:before{content:"";position:absolute;inset:8% 0 0;background:repeating-linear-gradient(105deg,transparent 0 15px,#a3d3cb12 16px 18px);opacity:.8}
+.sparkle{position:absolute;width:4px;height:4px;border-radius:50%;background:#eafaff;box-shadow:0 0 9px #fff;animation:twinkle 2.5s infinite alternate}
+@keyframes twinkle{from{opacity:.25;transform:scale(.7)}to{opacity:1;transform:scale(1.3)}}
+.message-wrap{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);width:min(82%,520px)}
+.message{
+ min-height:82px;padding:25px 22px;display:flex;align-items:center;justify-content:center;text-align:center;
+ border:1px solid rgba(255,255,255,.16);border-radius:8px;
+ background:rgba(0,40,87,.43);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+ box-shadow:0 10px 35px rgba(0,20,55,.12);
+ font-size:clamp(17px,3.5vw,23px);font-weight:600;letter-spacing:.2px;
+ text-shadow:0 2px 8px #001b38;animation:fade .9s ease;
+}
+@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.hint{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:2px;color:#e4f6ff9c}
+@media(max-width:600px){.message-wrap{width:78%}.message{min-height:72px;padding:20px 15px}.cloud.a{width:75vw}.cloud.b{width:60vw}.cloud.c{width:55vw}.hill{height:36%;bottom:-11%}}
+</style>
+</head>
+<body>
+<div class="sky">
+  <div class="stars"></div>
+  <div class="cloud a"></div><div class="cloud b"></div><div class="cloud c"></div>
+  <div class="hill"></div>
+</div>
+<div class="message-wrap"><div class="message" id="message">Slamat tinggal</div></div>
+<div class="hint">LANGIT MENYIMPAN CERITA</div>
+<script>
+const texts = [
+  "Andai dulu kau tak pergi dari hidup ku ",
+  "Andai dulu kau tak pergi dari hidup ku tak kan mungkin ku temui",
+  "Cinta yang kini kumiliki",
+  "Cinta yang menerima kekurangan",
+  "Dan merubah cara ku memandang dunia",
+  "Andai dulu ku paksakan terus bersamamu",
+  "Belum tentu kisah kita berdua berakhir bahagia",
+  "Kisah yang mendewasakan kita berdua",
+  "Meski lewat luka"
+];
+let index = 0;
+const message = document.getElementById('message');
+function changeText(){
+  message.style.animation='none';
+  void message.offsetWidth;
+  index=(index+1)%texts.length;
+  message.textContent=texts[index];
+  message.style.animation='fade .9s ease';
+}
+setInterval(changeText,3500);
+</script>
+</body>
+</html>
